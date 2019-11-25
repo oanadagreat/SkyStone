@@ -34,11 +34,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Hardware;
-import com.qualcomm.robotcore.util.Range;
 
 /**
  * This file contains an example of an iterative (Non-Linear) "OpMode".
@@ -54,20 +51,13 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="prezentare", group="Iterative Opmode")
+@TeleOp(name="Test_Brat", group="Iterative Opmode")
 //@Disabled
-public class sasiu_1 extends OpMode
+public class brat_motor extends OpMode
 {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor LEFTBACKMOTOR = null;
-    private DcMotor RIGHTBACKMOTOR = null;
-    private DcMotor LEFTFRONTMOTOR = null;
-    private DcMotor RIGHTFRONTMOTOR = null;
-    private DcMotor ARMMOTOR = null;
-    private Servo Servo_brat;
-
-
+    private DcMotor Brat = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -79,25 +69,14 @@ public class sasiu_1 extends OpMode
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        LEFTBACKMOTOR = hardwareMap.get(DcMotor.class, "LEFTBACKMOTOR");
-        RIGHTBACKMOTOR = hardwareMap.get(DcMotor.class, "RIGHTBACKMOTOR");
-        LEFTFRONTMOTOR = hardwareMap.get(DcMotor.class, "LEFTFRONTMOTOR");
-        RIGHTFRONTMOTOR = hardwareMap.get(DcMotor.class, "RIGHTFRONTMOTOR");
-        ARMMOTOR = hardwareMap.get(DcMotor.class,"ARMMOTOR");
-        Servo_brat = hardwareMap.get(Servo.class,"SERVO");
+        Brat = hardwareMap.get(DcMotor.class,"brat");
+        Brat.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        LEFTBACKMOTOR.setDirection(DcMotor.Direction.FORWARD);
-        LEFTFRONTMOTOR.setDirection(DcMotor.Direction.FORWARD);
-        RIGHTBACKMOTOR.setDirection(DcMotor.Direction.REVERSE);
-        RIGHTFRONTMOTOR.setDirection(DcMotor.Direction.REVERSE);
-        ARMMOTOR.setDirection(DcMotor.Direction.FORWARD);
-
 
 
         // Tell the driver that initialization is complete.
-        telemetry.addData("Status", "Initialized");
     }
 
     /*
@@ -120,55 +99,32 @@ public class sasiu_1 extends OpMode
      */
     @Override
     public void loop() {
-        ///puterea motoarelor
-        double leftPower;
-        double rightPower;
+        // Setup a variable for each drive wheel to save power level for telemetr
 
-        ///variabile pentru motoare
-        double drive = -gamepad1.left_stick_y;
-        double turn  =  gamepad1.right_stick_x;
-        double arm_power=0;
+        // Choose to drive using either Tank Mode, or POV Mode
+        // Comment out the method that's not used.  The default below is POV.
 
-        ///Variabila pt pozitia servo-ulu
+        // POV Mode uses left stick to go forward, and right stick to turn.
+        // - This uses basic math to combine motions and is easier to drive straight.
 
-        ///dat putere pentru partea stanga si dreapta
-        leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-        rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+        // Tank Mode uses one stick to control each wheel.
+        // - This requires no math, but it is hard to drive forward slowly and keep straight.
+        // leftPower  = -gamepad1.left_stick_y ;
+        // rightPower = -gamepad1.right_stick_y ;
 
-
-        ///lucrarea cu servoul pentru cub
+        double putere_brat=0;
+        // Send calculated power to wheels
         if (gamepad1.a==true)
         {
-            Servo_brat.setPosition(-1);
+            putere_brat=0.5;
         }
         else
-        if (gamepad1.y==true)
-            Servo_brat.setPosition(1);
+            if (gamepad1.x==true)
+                putere_brat=-0.5;
 
-
-        ///lucrare cu motorul de la brat
-
-        if (gamepad1.left_bumper==true)
-        {
-            if (gamepad1.dpad_up==true)
-                arm_power = 0.4;
-            if (gamepad1.dpad_down==true)
-                arm_power=-0.4;
-        }
-        else
-            arm_power=0;
-
-
-        telemetry.update();
-
-        // setarea puterii la motoare
-        LEFTBACKMOTOR.setPower(leftPower);
-        LEFTFRONTMOTOR.setPower(leftPower);
-        RIGHTFRONTMOTOR.setPower(rightPower);
-        RIGHTBACKMOTOR.setPower(rightPower);
-        ARMMOTOR.setPower(arm_power);
-
-
+        Brat.setPower(putere_brat);
+        // Show the elapsed game time and wheel power.
+        telemetry.addData("Status", "Run Time: " + runtime.toString());
 
     }
 
@@ -177,11 +133,7 @@ public class sasiu_1 extends OpMode
      */
     @Override
     public void stop() {
-        LEFTBACKMOTOR.setPower(0);
-        LEFTFRONTMOTOR.setPower(0);
-        RIGHTFRONTMOTOR.setPower(0);
-        RIGHTBACKMOTOR.setPower(0);
-        ARMMOTOR.setPower(0);
+        Brat.setPower(0);
     }
 
 
