@@ -55,7 +55,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="prezentare", group="Iterative Opmode")
-//@Disabled
+@Disabled
 public class sasiu_1 extends OpMode
 {
     // Declare OpMode members.

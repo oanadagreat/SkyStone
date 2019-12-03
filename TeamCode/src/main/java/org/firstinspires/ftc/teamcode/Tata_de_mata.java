@@ -52,7 +52,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="SPORT", group="Iterative Opmode")
-//@Disabled
+@Disabled
 public class Tata_de_mata extends OpMode
 {
     // Declare OpMode members.

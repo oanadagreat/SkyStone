@@ -126,10 +126,10 @@ public class test_brat extends OpMode
          */
         double armPower=0;
         if (gamepad1.a==true)
-            armPower = gamepad1.left_trigger;
+            armPower = gamepad1.left_trigger*0.5;
         else
             if (gamepad1.b)
-                armPower = -gamepad1.left_trigger;
+                armPower = -gamepad1.left_trigger*0.5;
 
         // Show the elapsed game time and wheel power.
 

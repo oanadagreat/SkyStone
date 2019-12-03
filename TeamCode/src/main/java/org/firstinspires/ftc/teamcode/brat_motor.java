@@ -52,7 +52,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="Test_Brat", group="Iterative Opmode")
-//@Disabled
+@Disabled
 public class brat_motor extends OpMode
 {
     // Declare OpMode members.

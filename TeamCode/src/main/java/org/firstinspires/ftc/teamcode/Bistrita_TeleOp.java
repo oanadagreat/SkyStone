@@ -29,13 +29,18 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
+import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PRINDERE_COMPLETA;
+import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PRINDERE_INITIAL;
+import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TAVA_JOS;
+import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TAVA_SUS;
 
 /**
  * This file contains an example of an iterative (Non-Linear) "OpMode".
@@ -51,46 +56,29 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="testare+recea", group="Iterative Opmode")
+@TeleOp(name="Bistrita_Teleop", group="Iterative Opmode")
 //@Disabled
-public class servo extends OpMode
+public class Bistrita_TeleOp extends OpMode
 {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor LEFTBACKMOTOR = null;
-    private DcMotor RIGHTBACKMOTOR = null;
-    private DcMotor LEFTFRONTMOTOR = null;
-    private DcMotor RIGHTFRONTMOTOR = null;
-    private DcMotor ARMMOTOR = null; ///noul motor
-
-    private Servo prinde =null;
+    Hardware_Bistrita robot = new Hardware_Bistrita();
+    double poz_tava=TAVA_SUS;
+    double poz_prindere=PRINDERE_INITIAL;
+    //PENTRU MOTOARELE DE DEPLASARE
+    double LF,LB,RF,RB=0;
+    //PENTRU JOYSTICK
+    double x1,y1,x2,y2;
+    //operational stuff
+    double joyScale = 0.5;
 
     /*
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
-        telemetry.addData("Status", "Initialized");
-
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
-        LEFTBACKMOTOR = hardwareMap.get(DcMotor.class, "LEFTBACKMOTOR");
-        RIGHTBACKMOTOR = hardwareMap.get(DcMotor.class, "RIGHTBACKMOTOR");
-        LEFTFRONTMOTOR = hardwareMap.get(DcMotor.class, "LEFTFRONTMOTOR");
-        RIGHTFRONTMOTOR = hardwareMap.get(DcMotor.class, "RIGHTFRONTMOTOR");
-
-
-        prinde = hardwareMap.get(Servo.class, "SERVO");
-
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
-        LEFTBACKMOTOR.setDirection(DcMotor.Direction.FORWARD);
-        LEFTFRONTMOTOR.setDirection(DcMotor.Direction.FORWARD);
-        RIGHTBACKMOTOR.setDirection(DcMotor.Direction.REVERSE);
-        RIGHTFRONTMOTOR.setDirection(DcMotor.Direction.REVERSE);
-
-
+        telemetry.addData("Status", "Before Initialization");
+        robot.init(hardwareMap);
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
     }
@@ -116,41 +104,102 @@ public class servo extends OpMode
     @Override
     public void loop() {
         // Setup a variable for each drive wheel to save power level for telemetry
+
+        /** DEPLASARE MECANUM **/
+
         double leftPower;
         double rightPower;
-        double armPower;
 
-        // Choose to drive using either Tank Mode, or POV Mode
-        // Comment out the method that's not used.  The default below is POV.
-
-        // POV Mode uses left stick to go forward, and right stick to turn.
-        // - This uses basic math to combine motions and is easier to drive straight.
         double drive = -gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
+        double strafe_right = gamepad1.right_trigger;
+        double strafe_left = gamepad1.left_trigger;
+
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 
-        // Tank Mode uses one stick to control each wheel.
-        // - This requires no math, but it is hard to drive forward slowly and keep straight.
-        // leftPower  = -gamepad1.left_stick_y ;
-        // rightPower = -gamepad1.right_stick_y ;
-        if (gamepad1.x==true)
+
+        if (strafe_right>0)
         {
-            prinde.setPosition(1);
+            robot.LeftBackMotor.setPower(-strafe_right);
+            robot.LeftFrontMotor.setPower(strafe_right);
+            robot.RightBackMotor.setPower(strafe_right);
+            robot.RightFrontMotor.setPower(-strafe_right);
         }
         else
-        {   if (gamepad1.a==true)
-                prinde.setPosition(-1);}
+            if (strafe_left>0)
+            {
+                robot.LeftBackMotor.setPower(strafe_left);
+                robot.LeftFrontMotor.setPower(-strafe_left);
+                robot.RightBackMotor.setPower(-strafe_left);
+                robot.RightFrontMotor.setPower(strafe_left);
+            }
+            else {
+                robot.LeftBackMotor.setPower(leftPower);
+                robot.LeftFrontMotor.setPower(leftPower);
+                robot.RightFrontMotor.setPower(rightPower);
+                robot.RightBackMotor.setPower(rightPower);
+            }
 
-        // Send calculated power to wheels
-        LEFTBACKMOTOR.setPower(leftPower);
-        LEFTFRONTMOTOR.setPower(leftPower);
-        RIGHTFRONTMOTOR.setPower(rightPower);
-        RIGHTBACKMOTOR.setPower(rightPower);
+        /** SFARSIT DEPLASARE **/
 
-        // Show the elapsed game time and wheel power.
+        /** SLIDERE BRAT **/
+
+        double armPower=0;
+
+        if (gamepad2.a==true) ///retragere slidere
+            armPower = gamepad2.left_trigger;
+        else
+        if (gamepad2.b) ///extindere slidere
+            armPower = -gamepad2.left_trigger;
+
+
+        double verticalPower=0;
+
+        if (gamepad2.a==true) ///sus || jos
+            verticalPower = gamepad2.right_trigger;
+        else
+        if (gamepad2.b==true) /// jos || sus
+            verticalPower = -gamepad2.right_trigger;
+
+        robot.SliderMotor.setPower(armPower);
+        robot.VerticalMotor.setPower(verticalPower);
+
+
+        if (gamepad2.dpad_left)
+            poz_prindere= PRINDERE_COMPLETA;
+        else
+            if (gamepad2.dpad_right)
+                poz_prindere=PRINDERE_INITIAL;
+
+        robot.prindere.setPosition(poz_prindere);
+
+        /** SFARSIT SLIDERE BRAT **/
+
+        /** TRAGERE TAVA **/
+
+        double jos;
+        if (gamepad1.x)
+            jos=1;
+        else
+            if (gamepad1.y)
+                jos=-1;
+            else
+                jos=0;
+        robot.PullMotor.setPower(jos);
+
+        if (gamepad1.dpad_up)
+            poz_tava=PRINDERE_COMPLETA;
+        else
+            if (gamepad1.dpad_down)
+                poz_tava=PRINDERE_INITIAL;
+
+
+        robot.tava.setPosition(poz_tava);
+
+        /** SFARSIT TRAGERE TAVA **/
+
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
     }
 
     /*
@@ -158,12 +207,14 @@ public class servo extends OpMode
      */
     @Override
     public void stop() {
-        LEFTBACKMOTOR.setPower(0);
-        LEFTFRONTMOTOR.setPower(0);
-        RIGHTFRONTMOTOR.setPower(0);
-        RIGHTBACKMOTOR.setPower(0);
+        robot.LeftBackMotor.setPower(0);
+        robot.LeftFrontMotor.setPower(0);
+        robot.RightFrontMotor.setPower(0);
+        robot.RightBackMotor.setPower(0);
 
+        robot.SliderMotor.setPower(0);
+        robot.VerticalMotor.setPower(0);
+        robot.PullMotor.setPower(0);
     }
-    
 
 }
