@@ -2,11 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 // chemam bibliotecile sa isi foloseasca cartile in scop util
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardwareDCMotor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.util.ElapsedTime;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 //pac si cream o clasa
 public class TeleghidareBlana {
@@ -42,55 +42,78 @@ public class TeleghidareBlana {
         //aici avem motoarele de directii
 
         /** motor fata dreapta**/
-        motorFR = harta.get(DcMotor.class, deviceName "FRmotor");
-        motorFR.setdirection(DcMotor.Direction.forward);
+        motorFR = harta.get(DcMotor.class,"FRmotor");
+        motorFR.setdirection(DcMotor.Direction.FORWARD);
 
         //initializare putere
         motorFR=setPower(0);
 
         /** motor fata stanga**/
-        motorFL = harta.get(DcMotor.class, deviceName "FLmotor");
-        motorFL.setDirection(DcMotor.Direction.reverse);
+        motorFL = harta.get(DcMotor.class,"FLmotor");
+        motorFL.setDirection(DcMotor.Direction.REVERSE);
 
         //initializare putere
         motorFL=setPower(0);
 
         /** motor spate dreapta**/
-        motorBR = harta.get(DcMotor.class, deviceName "BRmotor");
-        motorBR.setDirection(DcMotor.Direction.forward);
+        motorBR = harta.get(DcMotor.class,"BRmotor");
+        motorBR.setDirection(DcMotor.Direction.FORWARD);
 
         //initializare putere
         motorBR=setPower(0);
 
         /** motor spate stanga**/
-        motorBL = harta.get(DcMotor.class, deviceName "BLmotor");
-        motorBL.setDirection(DcMotor.Direction.reverse);
+        motorBL = harta.get(DcMotor.class,"BLmotor");
+        motorBL.setDirection(DcMotor.Direction.REVERSE);
 
         //initializare putere
         motorBL=setPower(0);
 
         //motoare brate
         /** motor orizontal**/
-        motorO = harta.get(DcMotor.class, deviceName "Omotor");
-        motorO.setDirection(Dcmotor.Direction.forward);
+        motorO = harta.get(DcMotor.class,"Omotor");
+        motorO.setDirection(Dcmotor.Direction.FORWARD);
 
         //initializare putere
         motorO=setPower(0);
 
         /** motor vertical**/
-        motorV = harta.get(DcMotor.class, deviceName "Vmotor");
-        motorV.setDirection(Dcmotor.Direction.forward);
+        motorV = harta.get(DcMotor.class,"Vmotor");
+        motorV.setDirection(Dcmotor.Direction.FORWARD);
 
         //initializare putere
         motorV=setPower(0);
 
         //motor de tragere
         /** motor tragere**/
-        motorI = harta.get(DcMotor.class, deviceName "Imotor");
-        motorI.setDirection(Dcmotor.Direction.forward);
+        motorI = harta.get(DcMotor.class,"Imotor");
+        motorI.setDirection(Dcmotor.Direction.FORWARD);
 
         //initializare putere
         motorI=setPower(0);
+
+        //si in sfarsit primesc si servo urile atentie saracele
+        cubuletz.setPosition(0.25);
+        tavitza.setPosition(0.25);
+
+        //ce sa faca la puterea 0
+        motorFR.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.FLOAT);
+        motorBR.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.FLOAT);
+        motorFL.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.FLOAT);
+        motorBL.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.FLOAT);
+        motorO.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.BREAK);
+        motorV.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.BREAK);
+        motorI.setZeroPowerBehaviour(DcMotor.ZeroPowerBehaviour.BREAK);
+
+        //ce sa faca daca nu are encoderele legate
+        motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorO.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorV.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorI.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
 }
