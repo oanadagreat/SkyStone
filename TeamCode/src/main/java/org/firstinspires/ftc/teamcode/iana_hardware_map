@@ -1,0 +1,96 @@
+package org.firstinspires.ftc.teamcode;
+
+// chemam bibliotecile sa isi foloseasca cartile in scop util
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardwareDCMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.util.ElapsedTime;
+
+//pac si cream o clasa
+public class TeleghidareBlana {
+    //declarare motoare pt deplasare si brate
+    public DCMotor motorFL=null;
+    public DCMotor motorFR=null;
+    public DCMotor motorBL=null;
+    public DCMotor motorBR=null;
+    public DCMotor O=null;
+    public DCMotor V=null;
+    public DCMotor I=null;
+
+    //declarare servouri ca ne trebe
+    public servo cubuletz=null;
+    public servo tavitza=null;
+
+    //dam valoare nula ca sa nu primeasca ceva mai blana automat
+    HardwareMap harta=null;
+
+    //actualizare timp
+    private ElapsedTime timp=new ElapsedTime();
+
+    // autoapelare
+    public TeleghidareBlana(){
+    }
+    //initializam interfata hardware
+    public void init(HardWareMap harta2){
+
+        //dam valoare la harta de mai devreme
+        harta = harta2;
+
+        //initializam motoarele
+        //aici avem motoarele de directii
+
+        /** motor fata dreapta**/
+        motorFR = harta.get(DcMotor.class, deviceName "FRmotor");
+        motorFR.setdirection(DcMotor.Direction.forward);
+
+        //initializare putere
+        motorFR=setPower(0);
+
+        /** motor fata stanga**/
+        motorFL = harta.get(DcMotor.class, deviceName "FLmotor");
+        motorFL.setDirection(DcMotor.Direction.reverse);
+
+        //initializare putere
+        motorFL=setPower(0);
+
+        /** motor spate dreapta**/
+        motorBR = harta.get(DcMotor.class, deviceName "BRmotor");
+        motorBR.setDirection(DcMotor.Direction.forward);
+
+        //initializare putere
+        motorBR=setPower(0);
+
+        /** motor spate stanga**/
+        motorBL = harta.get(DcMotor.class, deviceName "BLmotor");
+        motorBL.setDirection(DcMotor.Direction.reverse);
+
+        //initializare putere
+        motorBL=setPower(0);
+
+        //motoare brate
+        /** motor orizontal**/
+        motorO = harta.get(DcMotor.class, deviceName "Omotor");
+        motorO.setDirection(Dcmotor.Direction.forward);
+
+        //initializare putere
+        motorO=setPower(0);
+
+        /** motor vertical**/
+        motorV = harta.get(DcMotor.class, deviceName "Vmotor");
+        motorV.setDirection(Dcmotor.Direction.forward);
+
+        //initializare putere
+        motorV=setPower(0);
+
+        //motor de tragere
+        /** motor tragere**/
+        motorI = harta.get(DcMotor.class, deviceName "Imotor");
+        motorI.setDirection(Dcmotor.Direction.forward);
+
+        //initializare putere
+        motorI=setPower(0);
+    }
+
+}
