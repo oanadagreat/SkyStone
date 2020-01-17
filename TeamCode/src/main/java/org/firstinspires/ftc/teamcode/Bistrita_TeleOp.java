@@ -57,7 +57,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TAVA_SUS;
  */
 
 @TeleOp(name="Bistrita_Teleop", group="Iterative Opmode")
-//@Disabled
+@Disabled
 public class Bistrita_TeleOp extends OpMode
 {
     // Declare OpMode members.

@@ -135,19 +135,6 @@ public class Cluj_TeleOp extends OpMode
 
         /** SFARSIT DEPLASARE **/
 
-        /** SLIDERE BRAT **/
-
-        double verticalPower = 0;
-        if(gamepad2.a){
-            verticalPower = gamepad2.left_trigger;
-        }
-        else{
-            if(gamepad2.b)
-                verticalPower = -gamepad2.left_trigger;
-        }
-
-        robot.leftSliderMotor.setPower(verticalPower);
-        robot.rightSliderMotor.setPower(verticalPower);
 
     }
 
@@ -159,6 +146,11 @@ public class Cluj_TeleOp extends OpMode
      */
     @Override
     public void stop() {
+        robot.LeftBackMotor.setPower(0);
+        robot.LeftFrontMotor.setPower(0);
+        robot.RightFrontMotor.setPower(0);
+        robot.RightBackMotor.setPower(0);
+
     }
 
 }
