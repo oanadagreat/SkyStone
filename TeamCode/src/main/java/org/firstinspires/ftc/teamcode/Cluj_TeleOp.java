@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -61,6 +62,9 @@ public class Cluj_TeleOp extends OpMode
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware_Cluj robot = new Hardware_Cluj();
+    double pozitieBrat = robot.PozitieInitiala;
+    double pozitieMana = robot.PozitieInitiala;
+    final double vitezaBrat = 0.5;
 
     @Override
     public void init() {
@@ -96,16 +100,12 @@ public class Cluj_TeleOp extends OpMode
 
         double drive = -gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
-        double strafe_right = gamepad1.right_trigger;
-        double strafe_left = gamepad1.left_trigger;
+        double strafe_right = gamepad1.left_trigger;
+        double strafe_left = gamepad1.right_trigger;
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 
-        // Tank Mode uses one stick to control each wheel.
-        // - This requires no math, but it is hard to drive forward slowly and keep straight.
-        // leftPower  = -gamepad1.left_stick_y ;
-        // rightPower = -gamepad1.right_stick_y ;
 
         if (strafe_right>0)
         {
@@ -129,11 +129,14 @@ public class Cluj_TeleOp extends OpMode
             robot.RightBackMotor.setPower(rightPower);
         }
 
+
+        leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+        rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
 
-        /** SFARSIT DEPLASARE **/
 
         /** SLIDERE BRAT **/
 
@@ -146,19 +149,91 @@ public class Cluj_TeleOp extends OpMode
                 verticalPower = -gamepad2.left_trigger;
         }
 
-        robot.leftSliderMotor.setPower(verticalPower);
+        robot.leftSliderMotor.setPower(-verticalPower);
         robot.rightSliderMotor.setPower(verticalPower);
 
-    }
 
+        /** motoare intake **/
+        double intakePower = 0;
+        if(gamepad1.x){
+            intakePower = 0.6;
+        }
+        else{
+            if(gamepad1.y)
+                intakePower = -0.6;
+        }
+        robot.leftIntakeMotor.setPower(-intakePower);
+        robot.rightIntakeMotor.setPower(intakePower);
+
+        /** servouri slider **/
+
+        if(gamepad2.dpad_up)
+            robot.servoExtindere.setPower(1);
+        else
+        if(gamepad2.dpad_down)
+            robot.servoExtindere.setPower(-1);
+        else
+        if(gamepad2.right_bumper)
+            robot.servoExtindere.setPower(0);
+
+        //pozitieBrat = Range.clip(pozitieBrat, robot.pozitieMinima, robot.pozitieMaxima);
+        telemetry.addData("pozitie brat", "%.2f", pozitieBrat);
+
+
+        /** servouri manuta **/
+
+        if(gamepad2.x)
+            robot.servoPrindereCub.setPosition(0.5);
+        else
+        if (gamepad2.y)
+            robot.servoPrindereCub.setPosition(-1);
+
+
+        /** servouri tava**/
+        if(gamepad2.dpad_left) {
+            robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
+            robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
+
+            robot.servoTavaStanga.setPosition(-0.25);
+            robot.servoTavaStanga.setPosition(0.25);
+        }
+        else
+        if(gamepad2.dpad_right){
+            robot.servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
+            robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
+
+            robot.servoTavaStanga.setPosition(0.25);
+            robot.servoTavaStanga.setPosition(-0.25);
+        }
+        if(gamepad2.dpad_up){
+            robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
+            robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
+
+            robot.servoTavaStanga.setPosition(-0.25);
+            robot.servoTavaStanga.setPosition(0.25);
+        }
+
+
+    }
 
 
 
     /*
      * Code to run ONCE after the driver hits STOP
      */
+
     @Override
-    public void stop() {
+    public void stop(){
+        robot.LeftBackMotor.setPower(0);
+        robot.LeftFrontMotor.setPower(0);
+        robot.RightFrontMotor.setPower(0);
+        robot.RightBackMotor.setPower(0);
+
+        // robot.rightIntakeMotor.setPower(0);
+        // robot.leftIntakeMotor.setPower(0);
+
+        // robot.rightSliderMotor.setPower(0);
+        // robot.leftSliderMotor.setPower(0);
     }
 
 }
