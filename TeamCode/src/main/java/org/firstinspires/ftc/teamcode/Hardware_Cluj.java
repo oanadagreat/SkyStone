@@ -61,20 +61,20 @@ public class Hardware_Cluj
     public DcMotor RightBackMotor = null;
     public DcMotor RightFrontMotor = null;
 
-    /** Motoare pentru brat**/
 
-    public DcMotor leftSliderMotor = null;
-    public DcMotor rightSliderMotor = null;
+
+
+
 
     /** Servo pentru brat **/
 
     public Servo servoExtindere = null;
     public Servo servoPrindereCub = null;
 
-    /** Motoare intake **/
+    /**Servo pentru tava*/
+    public Servo servoTavaStanga=null;
+    public Servo servoTavaDreapta=null;
 
-    public DcMotor leftIntakeMotor = null;
-    public DcMotor rightIntakeMotor = null;
 
     public static final double      PRINDERE_INITIAL      =  0.25 ;
     public static final double      PRINDERE_COMPLETA = 1;
@@ -114,17 +114,12 @@ public class Hardware_Cluj
         RightFrontMotor = HWM_Cluj.get(DcMotor.class,"RightFrontMotor");
 
         /** Motoare pentru brat **/
-        leftSliderMotor = HWM_Cluj.get(DcMotor.class, "leftSliderMotor");
-        rightSliderMotor = HWM_Cluj.get(DcMotor.class, "rightSliderMotor");
+        //leftSliderMotor = HWM_Cluj.get(DcMotor.class, "leftSliderMotor");
+        //rightSliderMotor = HWM_Cluj.get(DcMotor.class, "rightSliderMotor");
 
         /** Servo-uri pentru brat **/
         servoExtindere = HWM_Cluj.get(Servo.class, "servoExtindere");
         servoPrindereCub = HWM_Cluj.get(Servo.class, "servoPrindereCub");
-
-        /** Motoare de intake **/
-
-        leftIntakeMotor = HWM_Cluj.get(DcMotor.class, "leftIntakeMotor");
-        rightIntakeMotor = HWM_Cluj.get(DcMotor.class, "rightIntakeMotor");
 
         /** MOTOARE DE DEPLASARE **/
         LeftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -132,9 +127,13 @@ public class Hardware_Cluj
         RightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         RightBackMotor.setDirection(DcMotor.Direction.FORWARD);
 
-        /** Motoare pentru brate **/
-        leftSliderMotor.setDirection(DcMotor.Direction.FORWARD);
-        rightSliderMotor.setDirection(DcMotor.Direction.FORWARD);
+        /** Servo-uri pentru brat **/
+        servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
+        servoTavaStanga.setDirection(Servo.Direction.FORWARD);
+
+        /** Servo-uri pentru intake **/
+        servoExtindere.setDirection(Servo.Direction.FORWARD);
+        servoPrindereCub.setDirection(Servo.Direction.FORWARD);
 
         // Set all motors to zero power
         /** MOTOARE DE DEPLASARE **/
@@ -143,18 +142,15 @@ public class Hardware_Cluj
         RightBackMotor.setPower(0);
         RightFrontMotor.setPower(0);
 
-        /** Motoare pentru brate **/
-        leftSliderMotor.setPower(0);
-        rightSliderMotor.setPower(0);
 
-        /** Servo-uri pentru brate **/
-        servoExtindere.setPosition(0);
+        /** Servo-uri pentru brat **/
+       servoExtindere.setPosition(0);
         servoPrindereCub.setPosition(0);
 
-        /** Motoare pentru intake **/
+        /** Servo-uri pentru intake **/
+        servoTavaStanga.setPosition(0);
+        servoTavaDreapta.setPosition(0);
 
-        leftIntakeMotor.setPower(0);
-        rightIntakeMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -164,8 +160,6 @@ public class Hardware_Cluj
         RightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         RightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        leftSliderMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightSliderMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
     }

@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
@@ -76,11 +77,11 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  */
 
 @Autonomous(name="Autonomie Tava Albastra", group="Pushbot")
-@Disabled
-public class auto_1 extends LinearOpMode {
+//@Disabled
+public class Autonomie_Patrat_Rosu extends LinearOpMode {
 
     /* Declare OpMode members. */
-    Hardware_Bistrita         robot   = new Hardware_Bistrita();   // Use a Pushbot's hardware
+    Hardware_Cluj         robot   = new Hardware_Cluj();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
@@ -92,11 +93,11 @@ public class auto_1 extends LinearOpMode {
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
          */
-        /***    INIT STARTS HERE                           ***/
-        /***                INIT STARTS HERE               ***/
-        /***                            INIT STARTS HERE   ***/
+        /*    INIT STARTS HERE                           */
+        /*                INIT STARTS HERE               */
+        /*                            INIT STARTS HERE   */
 
-        /***INIT***/
+        /**INIT**/
 
         robot.init(hardwareMap);
 
@@ -104,22 +105,17 @@ public class auto_1 extends LinearOpMode {
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
 
-        /***ENCODERS***/
+        /**ENCODERS**/
         robot.LeftBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.LeftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.RightBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.RightFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.PullMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.VerticalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.SliderMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.LeftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.RightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.LeftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.RightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.PullMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.SliderMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.VerticalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.RightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         // Send telemetry message to indicate successful Encoder reset
 
@@ -130,14 +126,30 @@ public class auto_1 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        /***    AUTONOMUS STARTS HERE                           ***/
-        /***                AUTONOMUS STARTS HERE               ***/
-        /***                            AUTONOMUS STARTS HERE   ***/
+        /*    AUTONOMUS STARTS HERE                           */
+        /*                AUTONOMUS STARTS HERE               */
+        /*                            AUTONOMUS STARTS HERE   */
 
+        /** TAVA  */
+
+        StrafeLeft(2,0.5);
+        DriveForward(2,0.5);
+       /* PrindereTava();
+        DriveBackward(1,0.5);
         DesprindereTava();
-       PrindereTava();
-       //PrindereStone();
-       //DesprindereTava();
+        StrafeRight(1,0.5);
+        DriveForward(1,0.5);
+        RotateLeft(90);
+        DriveForward(2,0.5);
+        PrindereTava();
+        StrafeLeft(1,0.5);
+        DesprindereTava();*/
+
+        /** PARCARE */
+        //RotateRight(90);
+        //DriveBackward(1,0.5);
+        //StrafeRight(2,0.5);
+
 
 
         sleep(1000);     // pause for servos to move
@@ -217,12 +229,12 @@ public class auto_1 extends LinearOpMode {
 
                 // Stop all motion;
 
-                 robot.LeftBackMotor.setPower(0);
-                 robot.RightBackMotor.setPower(0);
-                 robot.LeftFrontMotor.setPower(0);
-                 robot.RightFrontMotor.setPower(0);
+                robot.LeftBackMotor.setPower(0);
+                robot.RightBackMotor.setPower(0);
+                robot.LeftFrontMotor.setPower(0);
+                robot.RightFrontMotor.setPower(0);
 
-                /** COMMENT THESE FOR SPEED **/
+                /* COMMENT THESE FOR SPEED */
 
                 // Turn off RUN_TO_POSITION
                 robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -298,10 +310,10 @@ public class auto_1 extends LinearOpMode {
 
             // Stop all motion;
 
-             robot.LeftBackMotor.setPower(0);
-             robot.RightBackMotor.setPower(0);
-             robot.LeftFrontMotor.setPower(0);
-             robot.RightFrontMotor.setPower(0);
+            robot.LeftBackMotor.setPower(0);
+            robot.RightBackMotor.setPower(0);
+            robot.LeftFrontMotor.setPower(0);
+            robot.RightFrontMotor.setPower(0);
 
             // Turn off RUN_TO_POSITION
             robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -404,111 +416,39 @@ public class auto_1 extends LinearOpMode {
             //sleep(250);   // optional pause after each move
         }
     }
+
+    //robot.servoTavaStanga.setPosition(0.5);
+    //        robot.servoTavaDreapta.setPosition(0.5);
     public void RotateRight(double angle)
     {
         EncoderTurn(TURN_SPEED, angle, 15);
     }
 
+
     public void RotateLeft(double angle)
     {
+
         EncoderTurn(-TURN_SPEED, -angle, 15);
     }
-    public void PrindereStone()
-    {
-        robot.tava.setPosition(PRINDERE_COMPLETA);
+    public void PrindereStone() {
+
         idle();
     }
-    public void EncoderPull ( double speed, double distance, double direction, double timeoutS){
-        if (opModeIsActive()) {
-            int newPullTarget;
-
-
-
-            // Ensure that the opmode is still active
-            if (opModeIsActive()) {
-
-                if (direction==1)
-                    robot.PullMotor.setDirection(DcMotor.Direction.FORWARD);
-                else
-                    if (direction==-1)
-                        robot.PullMotor.setDirection(DcMotor.Direction.REVERSE);
-
-                robot.PullMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.PullMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
-                // Determine new target position, and pass to motor controller
-                newPullTarget = robot.PullMotor.getCurrentPosition() + (int) (distance * COUNTS_PER_MM * PullValue );
-
-                robot.PullMotor.setTargetPosition(newPullTarget);
-
-                robot.PullMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                // Turn On RUN_TO_POSITION
-
-
-                // reset the timeout time and start motion.
-                runtime.reset();
-                robot.PullMotor.setPower(Math.abs(speed));
-
-                // keep looping while we are still active, and there is time left, and both motors are running.
-                // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-                // its target position, the motion will stop.  This is "safer" in the event that the robot will
-                // always end the motion as soon as possible.
-                // However, if you require that BOTH motors have finished their moves before the robot continues
-                // onto the next step, use (isBusy() || isBusy()) in the loop test.
-                while (opModeIsActive() &&
-                        (runtime.seconds() < timeoutS) &&
-                        (
-                                robot.PullMotor.isBusy()
-
-                        )) {
-
-                    // Display it for the driver.
-                    telemetry.addData("Path1", "Running to %7d"
-                            , newPullTarget
-                    );
-                    telemetry.addData("Path2", "Running at %7d",
-                            robot.PullMotor.getCurrentPosition()
-
-                    );
-                    telemetry.update();
-                }
-
-                // Stop all motion;
-
-                robot.PullMotor.setPower(0);
-
-
-                /** COMMENT THESE FOR SPEED **/
-
-                // Turn off RUN_TO_POSITION
-                robot.PullMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.PullMotor.setDirection(DcMotor.Direction.FORWARD);
-
-
-                //sleep(250);   // optional pause after each move
-            }
-        }
-
+    public void PrindereTava(){
+        robot.servoTavaStanga.setPosition(0.25);
+        robot.servoTavaStanga.setPosition(0.25);
     }
-    public void DesprindereTava ()
-    {
-        EncoderPull(PULL_SPEED,1 ,-1,5);
+    public void DesprindereTava(){
+        robot.servoTavaStanga.setPosition(0.0);
+        robot.servoTavaDreapta.setPosition(0.0);
     }
-    public  void PrindereTava()
-    {
-        EncoderPull(PULL_SPEED,1,1,5);
-    }
+
     public void StopAllMotion() {
         robot.LeftFrontMotor.setPower(0);
         robot.RightFrontMotor.setPower(0);
         robot.LeftBackMotor.setPower(0);
         robot.RightBackMotor.setPower(0);
 
-        robot.PullMotor.setPower(0);
-        robot.VerticalMotor.setPower(0);
-        robot.SliderMotor.setPower(0);
     }
 
 }

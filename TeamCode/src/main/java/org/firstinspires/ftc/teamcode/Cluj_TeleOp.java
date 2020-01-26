@@ -138,6 +138,7 @@ public class Cluj_TeleOp extends OpMode
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
 
 
+<<<<<<< HEAD
         /** SLIDERE BRAT **/
 
         double verticalPower = 0;
@@ -151,6 +152,8 @@ public class Cluj_TeleOp extends OpMode
 
         robot.leftSliderMotor.setPower(-verticalPower);
         robot.rightSliderMotor.setPower(verticalPower);
+=======
+>>>>>>> 24aef263bef82b5ef5447396379058cd369ca7e2
 
 
         /** motoare intake **/
@@ -223,17 +226,24 @@ public class Cluj_TeleOp extends OpMode
      */
 
     @Override
+<<<<<<< HEAD
     public void stop(){
+=======
+    public void stop() {
+>>>>>>> 24aef263bef82b5ef5447396379058cd369ca7e2
         robot.LeftBackMotor.setPower(0);
         robot.LeftFrontMotor.setPower(0);
         robot.RightFrontMotor.setPower(0);
         robot.RightBackMotor.setPower(0);
 
+<<<<<<< HEAD
         // robot.rightIntakeMotor.setPower(0);
         // robot.leftIntakeMotor.setPower(0);
 
         // robot.rightSliderMotor.setPower(0);
         // robot.leftSliderMotor.setPower(0);
+=======
+>>>>>>> 24aef263bef82b5ef5447396379058cd369ca7e2
     }
 
 }
