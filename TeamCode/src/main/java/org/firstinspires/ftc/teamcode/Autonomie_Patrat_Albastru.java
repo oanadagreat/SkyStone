@@ -75,7 +75,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Autonomie Tava Albastra", group="Pushbot")
+@Autonomous(name="Autonomie Dreapta", group="Pushbot")
 //@Disabled
 public class Autonomie_Patrat_Albastru extends LinearOpMode {
 
@@ -130,21 +130,6 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
         /***                AUTONOMUS STARTS HERE               ***/
         /***                            AUTONOMUS STARTS HERE   ***/
 
-        StrafeRight(2,0.5);
-        DriveForward(2,0.5);
-        PrindereTava();
-        DriveBackward(1,0.5);
-        DesprindereTava();
-        StrafeLeft(1,0.5);
-        DriveForward(1,0.5);
-        RotateRight(90);
-        DriveForward(2,0.5);
-        PrindereTava();
-        StrafeRight(1,0.5);
-        DesprindereTava();
-        RotateLeft(90);
-        DriveBackward(1,0.5);
-        StrafeLeft(2,0.5);
 
         sleep(1000);     // pause for servos to move
 
@@ -250,9 +235,9 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * StrafeValue);
+            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * StrafeValue);
             newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * StrafeValue);
-            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * StrafeValue);
+            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * StrafeValue);
             newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * StrafeValue);
 
             robot.LeftBackMotor.setTargetPosition(newBackLeftTarget);
@@ -343,9 +328,9 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
             newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
-            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
             newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
 
             robot.LeftBackMotor.setTargetPosition(newBackLeftTarget);

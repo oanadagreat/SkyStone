@@ -35,7 +35,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
@@ -76,7 +75,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Autonomie Tava Albastra", group="Pushbot")
+@Autonomous(name="Autonomie stanga", group="Pushbot")
 //@Disabled
 public class Autonomie_Patrat_Rosu extends LinearOpMode {
 
@@ -93,11 +92,11 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
          */
-        /*    INIT STARTS HERE                           */
-        /*                INIT STARTS HERE               */
-        /*                            INIT STARTS HERE   */
+        /***    INIT STARTS HERE                           ***/
+        /***                INIT STARTS HERE               ***/
+        /***                            INIT STARTS HERE   ***/
 
-        /**INIT**/
+        /***INIT***/
 
         robot.init(hardwareMap);
 
@@ -105,16 +104,17 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
 
-        /**ENCODERS**/
+        /***ENCODERS***/
         robot.LeftBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.LeftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.RightBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.RightFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         robot.LeftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.RightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.RightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.RightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         // Send telemetry message to indicate successful Encoder reset
@@ -126,30 +126,9 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        /*    AUTONOMUS STARTS HERE                           */
-        /*                AUTONOMUS STARTS HERE               */
-        /*                            AUTONOMUS STARTS HERE   */
-
-        /** TAVA  */
-
-        StrafeLeft(2,0.5);
-        DriveForward(2,0.5);
-       /* PrindereTava();
-        DriveBackward(1,0.5);
-        DesprindereTava();
-        StrafeRight(1,0.5);
-        DriveForward(1,0.5);
-        RotateLeft(90);
-        DriveForward(2,0.5);
-        PrindereTava();
-        StrafeLeft(1,0.5);
-        DesprindereTava();*/
-
-        /** PARCARE */
-        //RotateRight(90);
-        //DriveBackward(1,0.5);
-        //StrafeRight(2,0.5);
-
+        /***    AUTONOMUS STARTS HERE                           ***/
+        /***                AUTONOMUS STARTS HERE               ***/
+        /***                            AUTONOMUS STARTS HERE   ***/
 
 
         sleep(1000);     // pause for servos to move
@@ -234,7 +213,7 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
                 robot.LeftFrontMotor.setPower(0);
                 robot.RightFrontMotor.setPower(0);
 
-                /* COMMENT THESE FOR SPEED */
+                /** COMMENT THESE FOR SPEED **/
 
                 // Turn off RUN_TO_POSITION
                 robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -256,9 +235,9 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * StrafeValue);
+            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * StrafeValue);
             newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * StrafeValue);
-            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * StrafeValue);
+            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * StrafeValue);
             newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * StrafeValue);
 
             robot.LeftBackMotor.setTargetPosition(newBackLeftTarget);
@@ -349,9 +328,9 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
             newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
-            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
             newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
 
             robot.LeftBackMotor.setTargetPosition(newBackLeftTarget);
@@ -416,39 +395,34 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
             //sleep(250);   // optional pause after each move
         }
     }
-
-    //robot.servoTavaStanga.setPosition(0.5);
-    //        robot.servoTavaDreapta.setPosition(0.5);
     public void RotateRight(double angle)
     {
         EncoderTurn(TURN_SPEED, angle, 15);
     }
 
-
     public void RotateLeft(double angle)
     {
-
         EncoderTurn(-TURN_SPEED, -angle, 15);
     }
-    public void PrindereStone() {
+    public void PrindereStone()
+    {
 
         idle();
     }
-    public void PrindereTava(){
-        robot.servoTavaStanga.setPosition(0.25);
-        robot.servoTavaStanga.setPosition(0.25);
+    public void DesprindereTava ()
+    {
     }
-    public void DesprindereTava(){
-        robot.servoTavaStanga.setPosition(0.0);
-        robot.servoTavaDreapta.setPosition(0.0);
-    }
+    public  void PrindereTava()
+    {
 
+    }
     public void StopAllMotion() {
         robot.LeftFrontMotor.setPower(0);
         robot.RightFrontMotor.setPower(0);
         robot.LeftBackMotor.setPower(0);
         robot.RightBackMotor.setPower(0);
 
+        //trebuie resetare la servo-uri ca sa devina 0
     }
 
 }
