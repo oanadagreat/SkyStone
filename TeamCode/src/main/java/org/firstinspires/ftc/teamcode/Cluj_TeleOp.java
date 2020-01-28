@@ -62,8 +62,7 @@ public class Cluj_TeleOp extends OpMode
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware_Cluj robot = new Hardware_Cluj();
-    double pozitieBrat = robot.PozitieInitiala;
-    double pozitieMana = robot.PozitieInitiala;
+    double pozitieBrat = 0;
     final double vitezaBrat = 0.5;
 
     @Override
@@ -138,7 +137,6 @@ public class Cluj_TeleOp extends OpMode
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
 
 
-<<<<<<< HEAD
         /** SLIDERE BRAT **/
 
         double verticalPower = 0;
@@ -150,10 +148,8 @@ public class Cluj_TeleOp extends OpMode
                 verticalPower = -gamepad2.left_trigger;
         }
 
-        robot.leftSliderMotor.setPower(-verticalPower);
-        robot.rightSliderMotor.setPower(verticalPower);
-=======
->>>>>>> 24aef263bef82b5ef5447396379058cd369ca7e2
+       // robot.leftSliderMotor.setPower(-verticalPower);
+        //robot.rightSliderMotor.setPower(verticalPower);
 
 
         /** motoare intake **/
@@ -165,19 +161,18 @@ public class Cluj_TeleOp extends OpMode
             if(gamepad1.y)
                 intakePower = -0.6;
         }
-        robot.leftIntakeMotor.setPower(-intakePower);
-        robot.rightIntakeMotor.setPower(intakePower);
+
 
         /** servouri slider **/
 
         if(gamepad2.dpad_up)
-            robot.servoExtindere.setPower(1);
+            robot.servoExtindere.setPosition(1);
         else
         if(gamepad2.dpad_down)
-            robot.servoExtindere.setPower(-1);
+            robot.servoExtindere.setPosition(-1);
         else
         if(gamepad2.right_bumper)
-            robot.servoExtindere.setPower(0);
+            robot.servoExtindere.setPosition(0);
 
         //pozitieBrat = Range.clip(pozitieBrat, robot.pozitieMinima, robot.pozitieMaxima);
         telemetry.addData("pozitie brat", "%.2f", pozitieBrat);
@@ -226,24 +221,24 @@ public class Cluj_TeleOp extends OpMode
      */
 
     @Override
-<<<<<<< HEAD
     public void stop(){
-=======
-    public void stop() {
->>>>>>> 24aef263bef82b5ef5447396379058cd369ca7e2
         robot.LeftBackMotor.setPower(0);
         robot.LeftFrontMotor.setPower(0);
         robot.RightFrontMotor.setPower(0);
         robot.RightBackMotor.setPower(0);
 
-<<<<<<< HEAD
         // robot.rightIntakeMotor.setPower(0);
         // robot.leftIntakeMotor.setPower(0);
 
         // robot.rightSliderMotor.setPower(0);
         // robot.leftSliderMotor.setPower(0);
-=======
->>>>>>> 24aef263bef82b5ef5447396379058cd369ca7e2
     }
 
 }
+
+
+
+
+
+
+
