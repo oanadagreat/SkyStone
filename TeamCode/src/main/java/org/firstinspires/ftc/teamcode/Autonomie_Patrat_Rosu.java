@@ -138,35 +138,19 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
 
         /** TAVA  */
 
-        //trebuie testat
 
-        //PARCARE CENTRU
+        /** PARCARE CENTRU*/
 
-        DriveForward(150,0.8);
-        StrafeLeft(300,0.8);
+        StrafeLeft(150,0.8);
+        DriveForward(300,0.8);
 
-        //PARCARE PERETE CU ROATA USOR DEFECTA
+        /** PARCARE PERETE CU ROATA USOR DEFECTA*/
 
-        DriveForward(35,0.8);
-        StrafeLeft(300,0.8);
+      //  DriveForward(300,0.8);
 
-
-        /**DriveForward(2,0.5);
-         PrindereTava();
-         DriveBackward(1,0.5);
-         DesprindereTava();
-         StrafeRight(1,0.5);
-         DriveForward(1,0.5);
-         RotateLeft(90);
-         DriveForward(2,0.5);
-         PrindereTava();
-         StrafeLeft(1,0.5);
-         DesprindereTava();**/
 
         /** PARCARE */
-        //RotateRight(90);
-        //DriveBackward(1,0.5);
-        //StrafeRight(2,0.5);
+
 
 
 
