@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -61,19 +62,18 @@ public class Hardware_Cluj
     public DcMotor RightBackMotor = null;
     public DcMotor RightFrontMotor = null;
 
-
-
-
-
-
     /** Servo pentru brat **/
 
-    public Servo servoExtindere = null;
+    public CRServo servoExtindere = null ;
     public Servo servoPrindereCub = null;
 
     /**Servo pentru tava*/
     public Servo servoTavaStanga=null;
     public Servo servoTavaDreapta=null;
+
+    /**Motoare slidere*/
+    public DcMotor leftSliderMotor=null;
+    public DcMotor rightSliderMotor=null;
 
 
     public static final double      PRINDERE_INITIAL      =  0.25 ;
@@ -94,7 +94,7 @@ public class Hardware_Cluj
     public static final double      PULL_SPEED = 0.1;
 
     /* local OpMode members. */
-    HardwareMap HWM_Cluj           =  null;
+    HardwareMap HWM_Cluj  =  null;
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
@@ -114,11 +114,11 @@ public class Hardware_Cluj
         RightFrontMotor = HWM_Cluj.get(DcMotor.class,"RightFrontMotor");
 
         /** Motoare pentru brat **/
-        //leftSliderMotor = HWM_Cluj.get(DcMotor.class, "leftSliderMotor");
-        //rightSliderMotor = HWM_Cluj.get(DcMotor.class, "rightSliderMotor");
+        leftSliderMotor = HWM_Cluj.get(DcMotor.class, "leftSliderMotor");
+        rightSliderMotor = HWM_Cluj.get(DcMotor.class, "rightSliderMotor");
 
         /** Servo-uri pentru brat **/
-        servoExtindere = HWM_Cluj.get(Servo.class, "servoExtindere");
+        servoExtindere = HWM_Cluj.get(CRServo.class, "servoExtindere");
         servoPrindereCub = HWM_Cluj.get(Servo.class, "servoPrindereCub");
 
         /** MOTOARE DE DEPLASARE **/
@@ -132,7 +132,8 @@ public class Hardware_Cluj
         servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
         /** Servo-uri pentru intake **/
-        servoExtindere.setDirection(Servo.Direction.FORWARD);
+
+        servoExtindere.setDirection(CRServo.Direction.FORWARD);
         servoPrindereCub.setDirection(Servo.Direction.FORWARD);
 
         // Set all motors to zero power
@@ -144,7 +145,7 @@ public class Hardware_Cluj
 
 
         /** Servo-uri pentru brat **/
-       servoExtindere.setPosition(0);
+        servoExtindere.setPower(0);
         servoPrindereCub.setPosition(0);
 
         /** Servo-uri pentru intake **/

@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -166,13 +167,13 @@ public class Cluj_TeleOp extends OpMode
         /** servouri slider **/
 
         if(gamepad2.dpad_up)
-            robot.servoExtindere.setPosition(1);
+            robot.servoExtindere.setPower(1);
         else
         if(gamepad2.dpad_down)
-            robot.servoExtindere.setPosition(-1);
+            robot.servoExtindere.setPower(-1);
         else
         if(gamepad2.right_bumper)
-            robot.servoExtindere.setPosition(0);
+            robot.servoExtindere.setPower(0);
 
         //pozitieBrat = Range.clip(pozitieBrat, robot.pozitieMinima, robot.pozitieMaxima);
         telemetry.addData("pozitie brat", "%.2f", pozitieBrat);
