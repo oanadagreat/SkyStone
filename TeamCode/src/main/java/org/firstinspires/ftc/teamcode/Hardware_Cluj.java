@@ -75,6 +75,10 @@ public class Hardware_Cluj
     public DcMotor leftSliderMotor=null;
     public DcMotor rightSliderMotor=null;
 
+    /**MOTOARE INTAKE*/
+    public DcMotor leftIntakeMotor=null;
+    public DcMotor rightIntakeMotor=null;
+
 
     public static final double      PRINDERE_INITIAL      =  0.25 ;
     public static final double      PRINDERE_COMPLETA = 1;
@@ -92,6 +96,7 @@ public class Hardware_Cluj
     public static final double      DRIVE_SPEED = 1;
     public static final double      TURN_SPEED = 0.5;
     public static final double      PULL_SPEED = 0.1;
+    public static final double PozitieInitial=0.27;
 
     /* local OpMode members. */
     HardwareMap HWM_Cluj  =  null;
@@ -113,6 +118,11 @@ public class Hardware_Cluj
         RightBackMotor = HWM_Cluj.get(DcMotor.class,"RightBackMotor");
         RightFrontMotor = HWM_Cluj.get(DcMotor.class,"RightFrontMotor");
 
+        /**MOTOARE INTAKE*/
+        leftIntakeMotor=HWM_Cluj.get(DcMotor.class,"leftIntakeMotor");
+        rightIntakeMotor=HWM_Cluj.get(DcMotor.class,"rightIntakeMotor");
+
+
         /** Motoare pentru brat **/
         leftSliderMotor = HWM_Cluj.get(DcMotor.class, "leftSliderMotor");
         rightSliderMotor = HWM_Cluj.get(DcMotor.class, "rightSliderMotor");
@@ -126,6 +136,9 @@ public class Hardware_Cluj
         LeftBackMotor.setDirection(DcMotor.Direction.REVERSE);
         RightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         RightBackMotor.setDirection(DcMotor.Direction.FORWARD);
+
+
+
 
         /** Servo-uri pentru brat **/
         servoTavaDreapta.setDirection(Servo.Direction.FORWARD);

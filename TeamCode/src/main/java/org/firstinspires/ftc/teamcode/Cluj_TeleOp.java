@@ -34,7 +34,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -63,7 +62,8 @@ public class Cluj_TeleOp extends OpMode
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware_Cluj robot = new Hardware_Cluj();
-    double pozitieBrat = 0;
+    double pozitieBrat = robot.PozitieInitial;
+    double pozitieMana = robot.PozitieInitial;
     final double vitezaBrat = 0.5;
 
     @Override
@@ -149,8 +149,8 @@ public class Cluj_TeleOp extends OpMode
                 verticalPower = -gamepad2.left_trigger;
         }
 
-       // robot.leftSliderMotor.setPower(-verticalPower);
-        //robot.rightSliderMotor.setPower(verticalPower);
+        robot.leftSliderMotor.setPower(-verticalPower);
+        robot.rightSliderMotor.setPower(verticalPower);
 
 
         /** motoare intake **/
@@ -162,7 +162,8 @@ public class Cluj_TeleOp extends OpMode
             if(gamepad1.y)
                 intakePower = -0.6;
         }
-
+        robot.leftIntakeMotor.setPower(-intakePower);
+        robot.rightIntakeMotor.setPower(intakePower);
 
         /** servouri slider **/
 
@@ -236,10 +237,4 @@ public class Cluj_TeleOp extends OpMode
     }
 
 }
-
-
-
-
-
-
 
