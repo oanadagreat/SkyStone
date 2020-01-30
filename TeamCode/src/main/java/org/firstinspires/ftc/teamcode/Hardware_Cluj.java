@@ -149,6 +149,10 @@ public class Hardware_Cluj
         servoExtindere.setDirection(CRServo.Direction.FORWARD);
         servoPrindereCub.setDirection(Servo.Direction.FORWARD);
 
+      /**ROTITE INTAKE**/
+      leftIntakeMotor.setDirection(DcMotor.Direction.FORWARD);
+      rightIntakeMotor.setDirection(DcMotor.Direction.FORWARD);
+
         // Set all motors to zero power
         /** MOTOARE DE DEPLASARE **/
         LeftBackMotor.setPower(0);
@@ -165,6 +169,9 @@ public class Hardware_Cluj
         servoTavaStanga.setPosition(0);
         servoTavaDreapta.setPosition(0);
 
+        /**Rotite intake*/
+        leftIntakeMotor.setPower(0);
+        rightIntakeMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
