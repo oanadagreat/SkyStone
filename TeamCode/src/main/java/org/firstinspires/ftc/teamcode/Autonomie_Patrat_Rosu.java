@@ -166,6 +166,16 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
          //Se muta
          DriveBackward(250,0.8);
          */
+
+        //AMC ESTI PE PARTEA CU TAVA
+        /**
+         * Trage tava
+         * intoarce
+         * ia cub
+         * il duce inapoi la tava
+         * parcheaza
+         *
+         */
         sleep(1000);     // pause for servos to move
 
         sleep(1000);     // pause for servos to move
