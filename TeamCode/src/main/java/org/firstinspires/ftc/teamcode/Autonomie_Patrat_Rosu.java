@@ -135,28 +135,38 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
 
+        /** PARCARE */
 
-        /** TAVA  */
+        //Cand o ia doar la stanga
 
+        //PARCARE CENTRU
 
+        DriveForward(300,0.8);
+        StrafeRight(150,0.8);
 
-        /**DOAR PARCARI*/
+        //PARCARE PERETE CU ROATA USOR DEFECTA
 
-        /** PARCARE CENTRU*/
-
-
-        StrafeLeft(150,0.8);
         DriveForward(300,0.8);
 
-        /** PARCARE PERETE CU ROATA USOR DEFECTA*/
+        //INTAKE CUB PE BUCATA CU CUBURI
 
-      //  DriveForward(300,0.8);
-
-
-
-
-
-
+        /**
+         StrafeRight(150,0.8);
+         Intake(0.8);
+         DriveBackward(40,0.8);
+         DriveForward(640,0.8);
+         //PrindeCub();
+         //Extinde();
+         //LasaCub();
+         //Retrage();
+         //Ceva intoarcere
+         PrindereTava();
+         //Alta intoarcere
+         //Trage tava
+         //Se muta
+         DriveBackward(250,0.8);
+         */
+        sleep(1000);     // pause for servos to move
 
         sleep(1000);     // pause for servos to move
 

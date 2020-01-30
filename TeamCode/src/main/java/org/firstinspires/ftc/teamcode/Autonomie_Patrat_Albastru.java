@@ -135,40 +135,37 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
 
+        /** PARCARE */
 
-        /** TAVA  */
-
-        //trebuie testat
+        //Cand o ia doar la dreapta
 
         //PARCARE CENTRU
 
-        DriveForward(150,0.8);
-        StrafeRight(300,0.8);
+        DriveForward(300,0.8);
+        StrafeLeft(150,0.8);
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 
-        DriveForward(35,0.8);
-        StrafeRight(300,0.8);
+        DriveForward(300,0.8);
 
-        /**DriveForward(2,0.5);
-         PrindereTava();
-         DriveBackward(1,0.5);
-         DesprindereTava();
-         StrafeRight(1,0.5);
-         DriveForward(1,0.5);
-         RotateLeft(90);
-         DriveForward(2,0.5);
-         PrindereTava();
-         StrafeLeft(1,0.5);
-         DesprindereTava();**/
+        //INTAKE CUB PE BUCATA CU CUBURI
 
-        /** PARCARE */
-        //RotateRight(90);
-        //DriveBackward(1,0.5);
-        //StrafeRight(2,0.5);
-
-
-
+      /**
+        StrafeLeft(150,0.8);
+        Intake(0.8);
+        DriveBackward(40,0.8);
+        DriveForward(640,0.8);
+        //PrindeCub();
+        //Extinde();
+        //LasaCub();
+        //Retrage();
+        //Ceva intoarcere
+        PrindereTava();
+        //Alta intoarcere
+        //Trage tava
+        //Se muta
+        DriveBackward(250,0.8);
+       */
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
@@ -446,9 +443,13 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
 
         EncoderTurn(-TURN_SPEED, -angle, 15);
     }
-    public void PrindereStone() {
-
-        idle();
+    public void Intake(int power){
+        robot.leftIntakeMotor.setPower(power);
+        robot.rightIntakeMotor.setPower(power);
+    }
+    public void Scuipa(int power){
+        robot.leftIntakeMotor.setPower(-power);
+        robot.rightIntakeMotor.setPower(-power);
     }
 
     public void PrindereTava(){
