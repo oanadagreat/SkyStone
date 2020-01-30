@@ -139,6 +139,9 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
         /** TAVA  */
 
 
+
+        /**DOAR PARCARI*/
+
         /** PARCARE CENTRU*/
 
         StrafeLeft(150,0.8);
@@ -149,7 +152,7 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
       //  DriveForward(300,0.8);
 
 
-        /** PARCARE */
+
 
 
 
