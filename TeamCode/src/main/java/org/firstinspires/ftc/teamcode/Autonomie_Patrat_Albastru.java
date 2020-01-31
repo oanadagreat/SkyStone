@@ -78,7 +78,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Autonom Dreapta", group="Pushbot")
+@Autonomous(name="Auto Patrat Albastru", group="Pushbot")
 //@Disabled
 public class Autonomie_Patrat_Albastru extends LinearOpMode {
 
@@ -141,12 +141,13 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
 
         //PARCARE CENTRU
 
+        //fata e la intake
         DriveForward(250,0.8);
         StrafeLeft(150,0.8);
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 
-      // / DriveForward(300,0.8);
+        // DriveForward(300,0.8);
 
         //INTAKE CUB PE BUCATA CU CUBURI
 
