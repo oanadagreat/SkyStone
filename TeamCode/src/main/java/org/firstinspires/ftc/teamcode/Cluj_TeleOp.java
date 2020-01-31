@@ -190,7 +190,7 @@ public class Cluj_TeleOp extends OpMode
 
 
         /** servouri tava**/
-        if(gamepad2.dpad_left) {
+        if(gamepad1.dpad_left) {
             robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
             robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
@@ -198,14 +198,14 @@ public class Cluj_TeleOp extends OpMode
             robot.servoTavaStanga.setPosition(0.25);
         }
         else
-        if(gamepad2.dpad_right){
+        if(gamepad1.dpad_right){
             robot.servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
             robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
             robot.servoTavaStanga.setPosition(0.25);
             robot.servoTavaStanga.setPosition(-0.25);
         }
-        if(gamepad2.dpad_up){
+        if(gamepad1.dpad_up){
             robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
             robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
