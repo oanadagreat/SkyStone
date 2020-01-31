@@ -168,13 +168,13 @@ public class Cluj_TeleOp extends OpMode
         /** servouri slider **/
 
         if(gamepad2.dpad_up)
-            robot.servoExtindere.setPower(1);
+            robot.servoExtindere.setPosition(1);
         else
         if(gamepad2.dpad_down)
-            robot.servoExtindere.setPower(-1);
+            robot.servoExtindere.setPosition(-1);
         else
         if(gamepad2.right_bumper)
-            robot.servoExtindere.setPower(0);
+            robot.servoExtindere.setPosition(0);
 
         //pozitieBrat = Range.clip(pozitieBrat, robot.pozitieMinima, robot.pozitieMaxima);
         telemetry.addData("pozitie brat", "%.2f", pozitieBrat);

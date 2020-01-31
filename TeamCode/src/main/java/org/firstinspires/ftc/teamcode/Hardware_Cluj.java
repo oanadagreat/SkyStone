@@ -64,7 +64,7 @@ public class Hardware_Cluj
 
     /** Servo pentru brat **/
 
-    public CRServo servoExtindere = null ;
+    public Servo servoExtindere = null ;
     public Servo servoPrindereCub = null;
 
     /**Servo pentru tava*/
@@ -128,8 +128,13 @@ public class Hardware_Cluj
         rightSliderMotor = HWM_Cluj.get(DcMotor.class, "rightSliderMotor");
 
         /** Servo-uri pentru brat **/
-        servoExtindere = HWM_Cluj.get(CRServo.class, "servoExtindere");
+        servoExtindere = HWM_Cluj.get(Servo.class, "servoExtindere");
         servoPrindereCub = HWM_Cluj.get(Servo.class, "servoPrindereCub");
+
+        /**Servo-uri tava*/
+
+        servoTavaStanga=HWM_Cluj.get(Servo.class,"servoTavaStanga");
+        servoTavaDreapta=HWM_Cluj.get(Servo.class,"servoTavaDreapta");
 
         /** MOTOARE DE DEPLASARE **/
         LeftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -146,7 +151,7 @@ public class Hardware_Cluj
 
         /** Servo-uri pentru intake **/
 
-        servoExtindere.setDirection(CRServo.Direction.FORWARD);
+        servoExtindere.setDirection(Servo.Direction.FORWARD);
         servoPrindereCub.setDirection(Servo.Direction.FORWARD);
 
       /**ROTITE INTAKE**/
@@ -162,7 +167,7 @@ public class Hardware_Cluj
 
 
         /** Servo-uri pentru brat **/
-        servoExtindere.setPower(0);
+        servoExtindere.setPosition(0);
         servoPrindereCub.setPosition(0);
 
         /** Servo-uri pentru intake **/
