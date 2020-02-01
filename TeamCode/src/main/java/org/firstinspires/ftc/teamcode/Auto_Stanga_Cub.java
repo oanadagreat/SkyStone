@@ -139,11 +139,9 @@ public class Auto_Stanga_Cub extends LinearOpMode {
 
         //Cand o ia doar la dreapta
 
-        //PARCARE CENTRU
+        //PARCARE PERETE
 
-        //fata e la intake
-        DriveForward(150,0.8);
-        StrafeLeft(250,0.8);
+        StrafeRight(300,0.8);
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 

@@ -135,12 +135,11 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
 
-        /** PARCARE */
+        /** PARCARE PERETE */
 
-        //Cand o ia doar la dreapta
+       // StrafeRight(300,0.8);
 
-        //PARCARE CENTRU
-
+        //TAVA
 
         DriveForward(150,0.8);
         StrafeLeft(60,0.8);
@@ -156,6 +155,8 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         DriveForward(120,0.8);
         StrafeLeft(60,0.8);
         StrafeRight(200,0.8);
+
+
 
 
        // RotateLeft(90);

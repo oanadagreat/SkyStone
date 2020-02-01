@@ -137,11 +137,11 @@ public class Auto_Stanga_Tava extends LinearOpMode {
 
         /** PARCARE */
 
-        //Cand o ia doar la dreapta
+        StrafeLeft(300,0.8);
 
         //PARCARE CENTRU
 
-
+/*
         DriveForward(150,0.8);
         StrafeRight(60,0.8);
         DriveForward(45,0.4);
@@ -156,7 +156,7 @@ public class Auto_Stanga_Tava extends LinearOpMode {
         DriveForward(120,0.8);
         StrafeRight(60,0.8);
         StrafeLeft(200,0.8);
-
+*/
 
         // RotateLeft(90);
 

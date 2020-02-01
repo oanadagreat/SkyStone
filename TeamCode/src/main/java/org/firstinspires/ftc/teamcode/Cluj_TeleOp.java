@@ -155,11 +155,11 @@ public class Cluj_TeleOp extends OpMode
 
         /** motoare intake **/
         double intakePower = 0;
-        if(gamepad1.x){
+        if(gamepad1.y){
             intakePower = 0.6;
         }
         else{
-            if(gamepad1.y)
+            if(gamepad1.x)
                 intakePower = -0.6;
         }
         robot.leftIntakeMotor.setPower(-intakePower);
@@ -191,26 +191,22 @@ public class Cluj_TeleOp extends OpMode
 
         /** servouri tava**/
         if(gamepad1.dpad_left) {
-            robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
-            robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
-            robot.servoTavaStanga.setPosition(-0.25);
-            robot.servoTavaStanga.setPosition(0.25);
+            robot.servoTavaStanga.setPosition(0.7);
+            robot.servoTavaDreapta.setPosition(0.4);
         }
         else
         if(gamepad1.dpad_right){
-            robot.servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
-            robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
-            robot.servoTavaStanga.setPosition(0.25);
-            robot.servoTavaStanga.setPosition(-0.25);
+
+            robot.servoTavaStanga.setPosition(0);
+            robot.servoTavaDreapta.setPosition(0);
         }
         if(gamepad1.dpad_up){
-            robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
-            robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
-            robot.servoTavaStanga.setPosition(-0.25);
-            robot.servoTavaStanga.setPosition(0.25);
+
+            robot.servoTavaStanga.setPosition(0);
+            robot.servoTavaDreapta.setPosition(0);
         }
 
 

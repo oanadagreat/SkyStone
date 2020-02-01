@@ -146,7 +146,7 @@ public class Auto_Dreapta_Cub extends LinearOpMode {
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 
-        //DriveForward(300,0.8);
+        StrafeLeft(300,0.8);
 
         //INTAKE CUB PE BUCATA CU CUBURI
 
