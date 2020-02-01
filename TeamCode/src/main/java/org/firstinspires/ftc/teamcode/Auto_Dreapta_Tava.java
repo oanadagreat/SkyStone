@@ -144,11 +144,24 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         //fata e la intake
         DriveForward(150,0.8);
         StrafeLeft(60,0.8);
-        DriveForward(22,0.4);
+        DriveForward(45,0.4);
+        sleep(500);
         robot.servoTavaStanga.setPosition(0.7);
         robot.servoTavaDreapta.setPosition(0.4);
-        DriveBackward(50,0.8);
-        RotateLeft(90);
+        sleep(700);
+        DriveBackward(200,0.8);
+        sleep(500);
+        robot.servoTavaStanga.setPosition(0.0);
+        robot.servoTavaDreapta.setPosition(0.0);
+        sleep(500);
+        StrafeRight(200,0.8);
+        DriveForward(120,0.8);
+        StrafeLeft(60,0.8);
+        StrafeRight(200,0.8);
+
+
+       // RotateLeft(90);
+
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 
