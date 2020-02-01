@@ -168,7 +168,7 @@ public class Hardware_Cluj
 
         /** Servo-uri pentru brat **/
         servoExtindere.setPosition(0);
-        servoPrindereCub.setPosition(0);
+        servoPrindereCub.setPosition(-0.2);
 
         /** Servo-uri pentru intake **/
         servoTavaStanga.setPosition(0);

@@ -135,9 +135,6 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
 
-        /** PARCARE PERETE */
-
-       // StrafeRight(300,0.8);
 
         //TAVA
 
@@ -156,35 +153,6 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         StrafeLeft(60,0.8);
         StrafeRight(200,0.8);
 
-
-
-
-
-       // RotateLeft(90);
-
-
-        //PARCARE PERETE CU ROATA USOR DEFECTA
-
-        // DriveForward(300,0.8);
-
-        //INTAKE CUB PE BUCATA CU CUBURI
-
-        /**
-         StrafeLeft(150,0.8);
-         Intake(0.8);
-         DriveBackward(40,0.8);
-         DriveForward(640,0.8);
-         //PrindeCub();
-         //Extinde();
-         //LasaCub();
-         //Retrage();
-         //Ceva intoarcere
-         PrindereTava();
-         //Alta intoarcere
-         //Trage tava
-         //Se muta
-         DriveBackward(250,0.8);
-         */
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");

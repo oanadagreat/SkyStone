@@ -156,11 +156,11 @@ public class Cluj_TeleOp extends OpMode
         /** motoare intake **/
         double intakePower = 0;
         if(gamepad1.y){
-            intakePower = 0.3;
+            intakePower = 0.45;
         }
         else{
             if(gamepad1.x)
-                intakePower = -0.3;
+                intakePower = -0.45;
         }
         robot.leftIntakeMotor.setPower(-intakePower);
         robot.rightIntakeMotor.setPower(intakePower);
@@ -168,7 +168,7 @@ public class Cluj_TeleOp extends OpMode
         /** servouri slider **/
 
         if(gamepad2.dpad_up)
-            robot.servoExtindere.setPosition(1);
+            robot.servoExtindere.setPosition(0.45);
         else
         if(gamepad2.dpad_down)
             robot.servoExtindere.setPosition(-1);
