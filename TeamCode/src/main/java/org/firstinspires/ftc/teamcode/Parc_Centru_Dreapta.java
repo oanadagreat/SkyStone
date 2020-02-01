@@ -78,9 +78,9 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto Dreapta: Tava", group="Pushbot")
+@Autonomous(name="Parcare Centru Dreapta", group="Pushbot")
 //@Disabled
-public class Auto_Dreapta_Tava extends LinearOpMode {
+public class Parc_Centru_Dreapta extends LinearOpMode {
 
     /* Declare OpMode members. */
     Hardware_Cluj         robot   = new Hardware_Cluj();   // Use a Pushbot's hardware
@@ -135,56 +135,11 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
 
-        /** PARCARE PERETE */
 
-       // StrafeRight(300,0.8);
-
-        //TAVA
-
+        StrafeRight(300,0.8);
         DriveForward(150,0.8);
-        StrafeLeft(60,0.8);
-        DriveForward(45,0.4);
-        sleep(500);
-        PrindereTava();
-        sleep(700);
-        DriveBackward(200,0.8);
-        sleep(500);
-        DesprindereTava();
-        sleep(500);
-        StrafeRight(200,0.8);
-        DriveForward(120,0.8);
-        StrafeLeft(60,0.8);
-        StrafeRight(200,0.8);
 
 
-
-
-
-       // RotateLeft(90);
-
-
-        //PARCARE PERETE CU ROATA USOR DEFECTA
-
-        // DriveForward(300,0.8);
-
-        //INTAKE CUB PE BUCATA CU CUBURI
-
-        /**
-         StrafeLeft(150,0.8);
-         Intake(0.8);
-         DriveBackward(40,0.8);
-         DriveForward(640,0.8);
-         //PrindeCub();
-         //Extinde();
-         //LasaCub();
-         //Retrage();
-         //Ceva intoarcere
-         PrindereTava();
-         //Alta intoarcere
-         //Trage tava
-         //Se muta
-         DriveBackward(250,0.8);
-         */
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
