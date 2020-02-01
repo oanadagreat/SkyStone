@@ -443,11 +443,11 @@ public class Auto_Stanga_Tava extends LinearOpMode {
     public void PrindereTava(){
 
         robot.servoTavaStanga.setPosition(0.7);
-        robot.servoTavaDreapta.setPosition(0.4);
+        robot.servoTavaDreapta.setPosition(0.0);
     }
     public void DesprindereTava(){
         robot.servoTavaStanga.setPosition(0.0);
-        robot.servoTavaDreapta.setPosition(0.0);
+        robot.servoTavaDreapta.setPosition(1);
     }
 
     public void StopAllMotion() {

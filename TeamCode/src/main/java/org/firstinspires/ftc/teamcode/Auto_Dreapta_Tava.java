@@ -139,7 +139,7 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         //TAVA
 
         DriveForward(150,0.8);
-        StrafeLeft(60,0.8);
+        StrafeLeft(75,0.8);
         DriveForward(45,0.4);
         sleep(500);
         PrindereTava();
@@ -147,11 +147,13 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
         DriveBackward(200,0.8);
         sleep(500);
         DesprindereTava();
-        sleep(500);
+        sleep(1000);
         StrafeRight(200,0.8);
         DriveForward(120,0.8);
         StrafeLeft(60,0.8);
+        DriveForward(30,0.8);
         StrafeRight(200,0.8);
+
 
         sleep(1000);     // pause for servos to move
 
@@ -441,10 +443,14 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
 
     public void PrindereTava(){
 
+        robot.servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
+        robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
         robot.servoTavaStanga.setPosition(0.7);
         robot.servoTavaDreapta.setPosition(0.4);
     }
     public void DesprindereTava(){
+        robot.servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
+        robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
         robot.servoTavaStanga.setPosition(0.0);
         robot.servoTavaDreapta.setPosition(0.0);
     }
