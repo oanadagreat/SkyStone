@@ -78,7 +78,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto Patrat Albastru", group="Pushbot")
+@Autonomous(name="Auto Stanga: Cub", group="Pushbot")
 //@Disabled
 public class Autonomie_Patrat_Albastru extends LinearOpMode {
 
