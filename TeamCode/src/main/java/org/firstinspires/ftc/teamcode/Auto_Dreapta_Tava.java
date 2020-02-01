@@ -380,8 +380,8 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
 
             // Determine new target position, and pass to motor controller
             newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
-            newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
-            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
             newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
 
             robot.LeftBackMotor.setTargetPosition(newBackLeftTarget);
