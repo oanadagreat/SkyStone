@@ -80,7 +80,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
 
 @Autonomous(name="Auto Dreapta: Cub", group="Pushbot")
 //@Disabled
-public class Autonomie_Patrat_Rosu extends LinearOpMode {
+public class Auto_Dreapta_Cub extends LinearOpMode {
 
     /* Declare OpMode members. */
     Hardware_Cluj         robot   = new Hardware_Cluj();   // Use a Pushbot's hardware

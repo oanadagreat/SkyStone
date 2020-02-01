@@ -80,7 +80,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
 
 @Autonomous(name="Auto Stanga: Cub", group="Pushbot")
 //@Disabled
-public class Autonomie_Patrat_Albastru extends LinearOpMode {
+public class Auto_Stanga_Cub extends LinearOpMode {
 
     /* Declare OpMode members. */
     Hardware_Cluj         robot   = new Hardware_Cluj();   // Use a Pushbot's hardware
@@ -151,22 +151,22 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
 
         //INTAKE CUB PE BUCATA CU CUBURI
 
-      /**
-        StrafeLeft(150,0.8);
-        Intake(0.8);
-        DriveBackward(40,0.8);
-        DriveForward(640,0.8);
-        //PrindeCub();
-        //Extinde();
-        //LasaCub();
-        //Retrage();
-        //Ceva intoarcere
-        PrindereTava();
-        //Alta intoarcere
-        //Trage tava
-        //Se muta
-        DriveBackward(250,0.8);
-       */
+        /**
+         StrafeLeft(150,0.8);
+         Intake(0.8);
+         DriveBackward(40,0.8);
+         DriveForward(640,0.8);
+         //PrindeCub();
+         //Extinde();
+         //LasaCub();
+         //Retrage();
+         //Ceva intoarcere
+         PrindereTava();
+         //Alta intoarcere
+         //Trage tava
+         //Se muta
+         DriveBackward(250,0.8);
+         */
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
