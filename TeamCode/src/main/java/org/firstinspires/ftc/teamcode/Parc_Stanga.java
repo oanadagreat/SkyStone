@@ -78,9 +78,9 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto Stanga: Tava", group="Pushbot")
+@Autonomous(name="Parcare Stanga", group="Pushbot")
 //@Disabled
-public class Auto_Stanga_Tava extends LinearOpMode {
+public class Parc_Stanga extends LinearOpMode {
 
     /* Declare OpMode members. */
     Hardware_Cluj         robot   = new Hardware_Cluj();   // Use a Pushbot's hardware
@@ -135,24 +135,9 @@ public class Auto_Stanga_Tava extends LinearOpMode {
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
 
-        /** PARCARE */
 
+        StrafeLeft(300,0.8);
 
-        DriveForward(150,0.8);
-        StrafeRight(75,0.8);
-        DriveForward(45,0.4);
-        sleep(500);
-        PrindereTava();
-        sleep(700);
-        DriveBackward(200,0.8);
-        sleep(500);
-        DesprindereTava();
-        sleep(500);
-        StrafeLeft(200,0.8);
-        DriveForward(120,0.8);
-        StrafeRight(60,0.8);
-        StrafeLeft(200,0.8);
-        DriveForward(30,0.8);
 
         sleep(1000);     // pause for servos to move
 
