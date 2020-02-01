@@ -172,7 +172,7 @@ public class Hardware_Cluj
 
         /** Servo-uri pentru intake **/
         servoTavaStanga.setPosition(0);
-        servoTavaDreapta.setPosition(0);
+        servoTavaDreapta.setPosition(0.1);
 
         /**Rotite intake*/
         leftIntakeMotor.setPower(0);
