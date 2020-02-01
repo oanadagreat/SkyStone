@@ -141,18 +141,16 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
 
         //PARCARE CENTRU
 
-        //fata e la intake
+
         DriveForward(150,0.8);
         StrafeLeft(60,0.8);
         DriveForward(45,0.4);
         sleep(500);
-        robot.servoTavaStanga.setPosition(0.7);
-        robot.servoTavaDreapta.setPosition(0.4);
+        PrindereTava();
         sleep(700);
         DriveBackward(200,0.8);
         sleep(500);
-        robot.servoTavaStanga.setPosition(0.0);
-        robot.servoTavaDreapta.setPosition(0.0);
+        DesprindereTava();
         sleep(500);
         StrafeRight(200,0.8);
         DriveForward(120,0.8);
@@ -472,11 +470,9 @@ public class Auto_Dreapta_Tava extends LinearOpMode {
     }
 
     public void PrindereTava(){
-        robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
-        robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
-        robot.servoTavaStanga.setPosition(0.25);
-        robot.servoTavaDreapta.setPosition(-0.25);
+        robot.servoTavaStanga.setPosition(0.7);
+        robot.servoTavaDreapta.setPosition(0.4);
     }
     public void DesprindereTava(){
         robot.servoTavaStanga.setPosition(0.0);

@@ -142,8 +142,8 @@ public class Autonomie_Patrat_Albastru extends LinearOpMode {
         //PARCARE CENTRU
 
         //fata e la intake
-        DriveForward(250,0.8);
-        StrafeLeft(150,0.8);
+        DriveForward(150,0.8);
+        StrafeLeft(250,0.8);
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 

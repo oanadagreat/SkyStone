@@ -141,8 +141,8 @@ public class Autonomie_Patrat_Rosu extends LinearOpMode {
 
         //PARCARE CENTRU
 
-        DriveForward(300,0.8);
-        StrafeRight(150,0.8);
+        DriveForward(150,0.8);
+        StrafeRight(250,0.8);
 
         //PARCARE PERETE CU ROATA USOR DEFECTA
 
