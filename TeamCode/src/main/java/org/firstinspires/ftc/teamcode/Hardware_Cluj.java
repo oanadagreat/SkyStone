@@ -55,6 +55,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Hardware_Cluj
 {
     /* Public OpMode members. */
+
+    /** Senzori culoare **/
+
+
+
     /** Motoare de deplasare**/
 
     public DcMotor LeftBackMotor = null;
@@ -145,16 +150,16 @@ public class Hardware_Cluj
 
 
 
-        /** Servo-uri pentru brat **/
+        /** Servo-uri pentru tava **/
         servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
         servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
-        /** Servo-uri pentru intake **/
+        /** Servo-uri pentru extindere si prindere cub **/
 
         servoExtindere.setDirection(Servo.Direction.FORWARD);
         servoPrindereCub.setDirection(Servo.Direction.FORWARD);
 
-      /**ROTITE INTAKE**/
+      /**MOTOARE INTAKE**/
       leftIntakeMotor.setDirection(DcMotor.Direction.FORWARD);
       rightIntakeMotor.setDirection(DcMotor.Direction.FORWARD);
 
@@ -167,8 +172,8 @@ public class Hardware_Cluj
 
 
         /** Servo-uri pentru brat **/
-        servoExtindere.setPosition(0.5);
-        servoPrindereCub.setPosition(0.2);
+        servoExtindere.setPosition(0);
+        servoPrindereCub.setPosition(0.5);
 
         /** Servo-uri pentru intake **/
         servoTavaStanga.setPosition(0);
@@ -185,7 +190,6 @@ public class Hardware_Cluj
         LeftBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         RightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         RightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
 
 
     }
