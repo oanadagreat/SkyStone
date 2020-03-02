@@ -42,14 +42,14 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 import java.util.Base64;
 
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.COUNTS_PER_MM;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.DriveValue;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PRINDERE_COMPLETA;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PULL_SPEED;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PullValue;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.StrafeValue;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TURN_SPEED;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.COUNTS_PER_MM;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.DriveValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.PRINDERE_COMPLETA;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.PULL_SPEED;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.PullValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.StrafeValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.TURN_SPEED;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.TurnValue;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -78,7 +78,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto Stanga: Tava", group="Pushbot")
+@Autonomous(name="Auto Tava: Albastru", group="Pushbot")
 //@Disabled
 public class Auto_Stanga_Tava extends LinearOpMode {
 
@@ -137,22 +137,42 @@ public class Auto_Stanga_Tava extends LinearOpMode {
 
         /** PARCARE */
 
-
         DriveForward(150,0.8);
         StrafeRight(75,0.8);
         DriveForward(45,0.4);
         sleep(500);
         PrindereTava();
-        sleep(700);
-        DriveBackward(200,0.8);
-        sleep(500);
+        sleep(300);
+        RotateRight(20);
+        sleep(1);
+        DriveBackward(155,0.8);
+        RotateRight(90);
+        sleep(1);
+        DriveForward(55,0.5);
         DesprindereTava();
+        sleep(300);
+        StrafeRight(70,0.8);
+        DriveBackward(200,0.8);
+
+
+
+        /**DriveForward(150,0.8);
+        StrafeRight(75,0.8);
+        DriveForward(45,0.4);
         sleep(500);
-        StrafeLeft(200,0.8);
-        DriveForward(120,0.8);
-        StrafeRight(60,0.8);
-        StrafeLeft(200,0.8);
-        DriveForward(30,0.8);
+        PrindereTava();
+        sleep(300);
+        DriveBackward(200, 0.8);
+        sleep(300);
+        DesprindereTava();
+        sleep(300);
+        StrafeLeft(140,0.8);
+        DriveForward(100,0.8);
+        StrafeRight(65,0.8);
+        sleep(1);
+        StrafeLeft(240,0.8);
+        DriveForward(35,0.5);**/
+
 
         sleep(1000);     // pause for servos to move
 
@@ -332,13 +352,16 @@ public class Auto_Stanga_Tava extends LinearOpMode {
     }
 
     public void DriveBackward (double distance, double speed) {
+
         EncoderDrive(-speed, distance,15);
     }
 
     public void StrafeRight(double distance, double speed) {
+
         EncoderStrafe(speed, distance, 15);
     }
     public void StrafeLeft (double distance, double speed) {
+
         EncoderStrafe(-speed, -distance, 15);
     }
     public void EncoderTurn(double speed, double distance, double timeoutS) {
@@ -420,11 +443,13 @@ public class Auto_Stanga_Tava extends LinearOpMode {
 
     //robot.servoTavaStanga.setPosition(0.5);
     //        robot.servoTavaDreapta.setPosition(0.5);
+
+
     public void RotateRight(double angle)
     {
+
         EncoderTurn(TURN_SPEED, angle, 15);
     }
-
 
     public void RotateLeft(double angle)
     {
@@ -442,11 +467,11 @@ public class Auto_Stanga_Tava extends LinearOpMode {
 
     public void PrindereTava(){
 
-        robot.servoTavaStanga.setPosition(0.7);
-        robot.servoTavaDreapta.setPosition(0.0);
+        robot.servoTavaStanga.setPosition(0.65);
+        robot.servoTavaDreapta.setPosition(0.65);
     }
     public void DesprindereTava(){
-        robot.servoTavaStanga.setPosition(0.0);
+        robot.servoTavaStanga.setPosition(1);
         robot.servoTavaDreapta.setPosition(1);
     }
 

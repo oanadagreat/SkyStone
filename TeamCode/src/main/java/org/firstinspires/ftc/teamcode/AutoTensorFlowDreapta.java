@@ -39,17 +39,22 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.Base64;
+import java.util.List;
 
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.COUNTS_PER_MM;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.DriveValue;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PRINDERE_COMPLETA;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PULL_SPEED;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.PullValue;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.StrafeValue;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TURN_SPEED;
-import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.COUNTS_PER_MM;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.DriveValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.PRINDERE_COMPLETA;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.PULL_SPEED;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.PullValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.StrafeValue;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.TURN_SPEED;
+import static org.firstinspires.ftc.teamcode.Hardware_Cluj.TurnValue;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -78,18 +83,34 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Parcare Stanga", group="Pushbot")
-@Disabled
-public class Parc_Stanga extends LinearOpMode {
+@Autonomous(name="AutoTesnorFlow Rosu", group="Pushbot")
+//@Disabled
+public class AutoTensorFlowDreapta extends LinearOpMode {
 
     /* Declare OpMode members. */
     Hardware_Cluj         robot   = new Hardware_Cluj();   // Use a Pushbot's hardware
+
+
+    private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
+    private static final String LABEL_FIRST_ELEMENT = "Stone";
+    private static final String LABEL_SECOND_ELEMENT = "Skystone";
+
     private ElapsedTime     runtime = new ElapsedTime();
 
+
+    private static final String VUFORIA_KEY = "AYWmhU7/////AAABmZ2OeZ5XtEDqgR2CdBUQL4EGfodxRjLEIegvxsdPdBhTCeCWbsCjBChlkbPWAv7k8zA3r1FSGtET63cm06w4iKcd7/9lhDlyD9jOOqjjmpG7PALXbyj478BlPVwLc2zp/bfdpAI8Vt3OcEjX1Kzfm3Vx1lRfhzhlfpD4IwF26GrlfxQIp7tv6PpBTy0ZtBkLsdT59GqrdO0BR9uicJF1i4NWij64beyPda6Jzftc+rMPet8jwg9kjntHBTtLHW6McVzQCIGqShxfRHXnWPJ4iOuoj1i6duOdFIuVclnlxtMZ1iwN0o6G+rQ81z4LaYqxQoW4+sVWbrJM9FO87qouaHTN3NThn3nAnNUYvuAmBMEP";
+    private VuforiaLocalizer vuforia;
+
+    private TFObjectDetector tfod;
 
 
     @Override
     public void runOpMode() {
+
+
+        telemetry.addData("HI!", " DON'T TOUCH ANYTHING");
+        telemetry.update();
+
 
         /*
          * Initialize the drive system variables.
@@ -103,9 +124,20 @@ public class Parc_Stanga extends LinearOpMode {
 
         robot.init(hardwareMap);
 
-        // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Resetting Encoders");    //
-        telemetry.update();
+
+        /***VUFORIA + TENSORFLOW***/
+        initVuforia();
+
+        if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
+            initTfod();
+        } else {
+            telemetry.addData("Sorry!", "This device is not compatible with TFOD");
+        }
+
+        if (tfod != null) {
+            tfod.activate();
+        }
+
 
         /*ENCODERS*/
         robot.LeftBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -121,9 +153,8 @@ public class Parc_Stanga extends LinearOpMode {
 
         // Send telemetry message to indicate successful Encoder reset
 
+        telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
-
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // Step through each leg of the path,
@@ -134,16 +165,144 @@ public class Parc_Stanga extends LinearOpMode {
 
         /**Se ridica partea de sus ca sa cada bratele de prindere a cubului*/
 
+        DriveForward(140,0.5);
+        sleep(1);
+        StrafeRight(160,0.7);
+        sleep(1);
+        checkTensorFlow(1000);
+        sleep(1);
+        if(checkTensorFlow(100) == 1){
+            DriveBackward(25,0.5);
+            RotateRight(47);
+            Intake(0.8);
+            DriveBackward(100,0.2);
+            sleep(1);
+            DriveForward(80,0.2);
+            sleep(1);
+            oprireIntake();
+            RotateLeft(60);
+            StrafeLeft(40,0.5);
+            DriveBackward(300,0.8);
+            sleep(1);
+            DriveForward(70,0.8);
+        }
+        else
+        if(checkTensorFlow(100) == 0){
+            DriveBackward(45,0.5);
+            sleep(1);
+            checkTensorFlow(1000);
+            sleep(1);
+            if(checkTensorFlow(100) == 1){
+                DriveBackward(40,0.5);
+                StrafeRight(50,0.5);
+                RotateRight(35);
+                Intake(0.8);
+                DriveBackward(50,0.2);
+                sleep(1);
+                DriveForward(80,0.2);
+                oprireIntake();
+                sleep(1);
+                RotateLeft(47);
+                StrafeLeft(40,0.5);
+                DriveBackward(350,0.8);
+                sleep(1);
+                DriveForward(70,0.8);
+            }
+            else{
+                DriveBackward(70,0.5);
+                StrafeRight(50,0.5);
+                RotateRight(35);
+                Intake(0.8);
+                DriveBackward(45,0.2);
+                sleep(1);
+                DriveForward(80,0.2);
+                oprireIntake();
+                sleep(1);
+                RotateLeft(47);
+                StrafeLeft(40,0.5);
+                DriveBackward(330,0.8);
+                sleep(1);
+                DriveForward(50,0.8);
+            }
+        }
 
-
-        StrafeLeft(300,0.8);
 
 
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
+
+
+        /***  AUTONOMUS ENDS HERE                             ***/
+        /***                AUTONOMUS ENDS HERE               ***/
+        /***                            AUTONOMUS ENDS HERE   ***/
     }
+
+
+    public int checkTensorFlow(int T) {
+        int skystone = 0;
+        while (opModeIsActive() && T > 0) {
+            if (tfod != null) {
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                if (updatedRecognitions != null) {
+                    telemetry.addData("# Object Detected", updatedRecognitions.size());
+
+                    // step through the list of recognitions and display boundary info.
+                    if(updatedRecognitions.size() == 1) {
+                        int i = 0;
+                        int pozitie = 0;
+                        for (Recognition recognition : updatedRecognitions) {
+                            telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                            telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                                    recognition.getLeft(), recognition.getTop());
+                            telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                                    recognition.getRight(), recognition.getBottom());
+                            if(recognition.getLabel().equals(LABEL_SECOND_ELEMENT))
+                                pozitie = (int) recognition.getLeft();
+                        }
+                        if(pozitie != 0){
+                            telemetry.addData("Skystone position", "front");
+                            skystone = 1;
+                        }
+
+                        telemetry.update();
+                    }
+                }
+            }
+            T--;
+            sleep(1);
+        }
+        return skystone;
+    }
+
+
+    private void initVuforia () {
+        /*
+         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+         */
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+
+        //  Instantiate the Vuforia engine
+        vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+        // Loading trackables is not necessary for the Tensor Flow Object Detection engine.
+    }
+
+    private void initTfod () {
+        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfodParameters.minimumConfidence = 0.8;
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
+    }
+
 
     /*
      *  Method to perfmorm a relative move, based on encoder counts.
@@ -320,10 +479,10 @@ public class Parc_Stanga extends LinearOpMode {
         EncoderDrive(-speed, distance,15);
     }
 
-    public void StrafeRight(double distance, double speed) {
+    public void StrafeLeft(double distance, double speed) {
         EncoderStrafe(speed, distance, 15);
     }
-    public void StrafeLeft (double distance, double speed) {
+    public void StrafeRight (double distance, double speed) {
         EncoderStrafe(-speed, -distance, 15);
     }
     public void EncoderTurn(double speed, double distance, double timeoutS) {
@@ -335,10 +494,10 @@ public class Parc_Stanga extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
-            newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
-            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int)(-distance * COUNTS_PER_MM * TurnValue);
-            newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int)(distance * COUNTS_PER_MM * TurnValue);
+            newBackLeftTarget = robot.LeftBackMotor.getCurrentPosition() + (int) (-distance * COUNTS_PER_MM * TurnValue);
+            newBackRightTarget = robot.RightBackMotor.getCurrentPosition() + (int) (distance * COUNTS_PER_MM * TurnValue);
+            newFrontLeftTarget = robot.LeftFrontMotor.getCurrentPosition() + (int) (-distance * COUNTS_PER_MM * TurnValue);
+            newFrontRightTarget = robot.RightFrontMotor.getCurrentPosition() + (int) (distance * COUNTS_PER_MM * TurnValue);
 
             robot.LeftBackMotor.setTargetPosition(newBackLeftTarget);
             robot.RightBackMotor.setTargetPosition(newBackRightTarget);
@@ -369,15 +528,14 @@ public class Parc_Stanga extends LinearOpMode {
                     (
                             robot.LeftBackMotor.isBusy() && robot.RightBackMotor.isBusy() &&
                                     robot.LeftFrontMotor.isBusy() && robot.RightFrontMotor.isBusy()
-                    ))
-            {
+                    )) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d :%7d :%7d"
+                telemetry.addData("Path1", "Running to %7d :%7d :%7d :%7d"
                         , newFrontLeftTarget, newFrontRightTarget
                         , newBackLeftTarget, newBackRightTarget
                 );
-                telemetry.addData("Path2",  "Running at %7d :%7d :%7d :%7d",
+                telemetry.addData("Path2", "Running at %7d :%7d :%7d :%7d",
                         robot.LeftFrontMotor.getCurrentPosition(),
                         robot.RightFrontMotor.getCurrentPosition()
                         ,
@@ -386,25 +544,12 @@ public class Parc_Stanga extends LinearOpMode {
                 );
                 telemetry.update();
             }
-
-            // Stop all motion;
-            robot.LeftBackMotor.setPower(0);
-            robot.RightBackMotor.setPower(0);
-            robot.LeftFrontMotor.setPower(0);
-            robot.RightFrontMotor.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            robot.LeftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.RightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.LeftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.RightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            //sleep(250);   // optional pause after each move
         }
     }
 
     //robot.servoTavaStanga.setPosition(0.5);
-    //        robot.servoTavaDreapta.setPosition(0.5);
+    //robot.servoTavaDreapta.setPosition(0.5);
+
     public void RotateRight(double angle)
     {
         EncoderTurn(TURN_SPEED, angle, 15);
@@ -416,19 +561,27 @@ public class Parc_Stanga extends LinearOpMode {
 
         EncoderTurn(-TURN_SPEED, -angle, 15);
     }
-    public void Intake(int power){
-        robot.leftIntakeMotor.setPower(power);
+    public void Intake(double power){
+        robot.leftIntakeMotor.setPower(-power);
         robot.rightIntakeMotor.setPower(power);
     }
+
+    public void oprireIntake(){
+        robot.leftIntakeMotor.setPower(0);
+        robot.rightIntakeMotor.setPower(0);
+    }
+
     public void Scuipa(int power){
         robot.leftIntakeMotor.setPower(-power);
         robot.rightIntakeMotor.setPower(-power);
     }
 
     public void PrindereTava(){
+        robot.servoTavaDreapta.setDirection(Servo.Direction.REVERSE);
+        robot.servoTavaStanga.setDirection(Servo.Direction.FORWARD);
 
-        robot.servoTavaStanga.setPosition(0.7);
-        robot.servoTavaDreapta.setPosition(0.4);
+        robot.servoTavaStanga.setPosition(0.25);
+        robot.servoTavaDreapta.setPosition(-0.25);
     }
     public void DesprindereTava(){
         robot.servoTavaStanga.setPosition(0.0);

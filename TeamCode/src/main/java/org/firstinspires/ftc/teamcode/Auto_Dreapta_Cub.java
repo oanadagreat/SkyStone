@@ -79,7 +79,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  */
 
 @Autonomous(name="Auto Dreapta: Cub", group="Pushbot")
-//@Disabled
+@Disabled
 public class Auto_Dreapta_Cub extends LinearOpMode {
 
     /* Declare OpMode members. */

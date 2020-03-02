@@ -90,7 +90,7 @@ public class Hardware_Cluj
     public static final double      TAVA_JOS =  0.75 ;
     public static final double      TAVA_SUS   = 0.25 ;
     public static final double      DriveValue = 2.43;
-    public static final double      TurnValue = 2;
+    public static final double      TurnValue = 3;
     public static final double      StrafeValue = 2;
     public static final double      PullValue = 125;
     public static final double      COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder 1440 tetrix
@@ -152,7 +152,7 @@ public class Hardware_Cluj
 
         /** Servo-uri pentru tava **/
         servoTavaDreapta.setDirection(Servo.Direction.FORWARD);
-        servoTavaStanga.setDirection(Servo.Direction.FORWARD);
+        servoTavaStanga.setDirection(Servo.Direction.REVERSE);
 
         /** Servo-uri pentru extindere si prindere cub **/
 
@@ -175,7 +175,7 @@ public class Hardware_Cluj
         servoExtindere.setPosition(0);
         servoPrindereCub.setPosition(0.5);
 
-        /** Servo-uri pentru intake **/
+        /** Servo-uri pentru TAVA **/
         servoTavaStanga.setPosition(0);
         servoTavaDreapta.setPosition(0);
 

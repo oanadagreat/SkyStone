@@ -79,7 +79,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  */
 
 @Autonomous(name="Parcare Centru Dreapta", group="Pushbot")
-//@Disabled
+@Disabled
 public class Parc_Centru_Dreapta extends LinearOpMode {
 
     /* Declare OpMode members. */

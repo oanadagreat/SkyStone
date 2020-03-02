@@ -96,7 +96,7 @@ import static org.firstinspires.ftc.teamcode.Hardware_Bistrita.TurnValue;
  */
 
 @Autonomous(name="AutoVuforiaTest", group="Pushbot")
-//@Disabled
+@Disabled
 public class AutoVuforiaTest extends LinearOpMode {
 
     // IMPORTANT:  For Phone Camera, set 1) the camera source and 2) the orientation, based on how your phone is mounted:

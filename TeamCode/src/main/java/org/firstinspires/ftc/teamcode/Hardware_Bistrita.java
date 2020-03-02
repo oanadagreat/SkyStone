@@ -82,7 +82,7 @@ public class Hardware_Bistrita
     public static final double      TAVA_JOS =  0.75 ;
     public static final double      TAVA_SUS   = 0.25 ;
     public static final double      DriveValue = 2.43;
-    public static final double      TurnValue = 2;
+    public static final double      TurnValue = 3;
     public static final double      StrafeValue = 2;
     public static final double      PullValue = 125;
     public static final double      COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder 1440 tetrix
