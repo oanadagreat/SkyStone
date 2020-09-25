@@ -56,9 +56,7 @@ public class Hardware_Cluj
 {
     /* Public OpMode members. */
 
-    /** Senzori culoare **/
-
-
+    
 
     /** Motoare de deplasare**/
 
